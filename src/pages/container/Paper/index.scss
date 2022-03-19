@@ -1,6 +1,5 @@
 .paper-a4 {
-    // @apply w-[21cm] h-[29.7cm] mb-3 mt-6 mx-6 bg-white flex flex-col items-center;
-    @apply w-[42cm] h-[59.4cm] mb-3 mt-6 mx-6 bg-black flex flex-col items-center;
+    @apply w-[21cm] h-[29.7cm] mb-3 mt-6 mx-6 bg-white flex flex-col items-center;
     .header {
         @apply flex flex-col items-center mt-20;
         .title {
@@ -15,11 +14,33 @@
         .table {
             @apply w-[100%];
             .row {
-                @apply border-b border-black h-10;
+                @apply border-b border-black leading-7;
                 .item {
                     @apply w-[90px];
                 }
                 .value {
+                }
+            }
+        }
+    }
+    .quotation-info {
+        @apply w-[80%] mt-16;
+        .table {
+            @apply w-[100%];
+            @apply border border-black;
+            .row {
+                // @apply border-b border-black h-10;
+                th {
+                    @apply border border-black font-black leading-5;
+                }
+                td {
+                    @apply border border-black leading-5;
+                    &.right {
+                        @apply text-right;
+                    }
+                    .split-cell {
+                        @apply border-0 leading-5;
+                    }
                 }
             }
         }
