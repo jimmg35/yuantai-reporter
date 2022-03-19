@@ -1,0 +1,6 @@
+.App {
+    @apply flex items-start;
+    .paper-a4 {
+        @apply w-[21cm] h-[29.7cm] border border-black m-3;
+    }
+}
