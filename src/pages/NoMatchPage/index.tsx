@@ -3,7 +3,7 @@ import './index.scss'
 import permissionDenied from '../../assets/permissionDenied.png'
 import { useNavigate } from 'react-router-dom'
 
-const PermissionDeniedPage = () => {
+const NoMatchPage = () => {
   const navigate = useNavigate()
 
   const handleButtonClick = () => {
@@ -24,4 +24,4 @@ const PermissionDeniedPage = () => {
   )
 }
 
-export default PermissionDeniedPage
+export default NoMatchPage

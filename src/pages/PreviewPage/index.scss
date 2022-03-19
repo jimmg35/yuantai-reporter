@@ -1,5 +1,45 @@
 .preview-page {
-    .paper-a4 {
-        @apply w-[21cm] h-[29.7cm] border border-black m-3;
+    @apply w-screen h-fit bg-gray-300 m-0 absolute flex flex-col items-center;
+    @media (max-width: 900px) {
+        @apply w-fit h-fit bg-gray-300 m-0 absolute flex flex-col items-center;
+    }
+    .container {
+        @apply flex flex-col w-fit h-fit;
+        .paper-a4 {
+            @apply w-[21cm] h-[29.7cm] mb-3 mt-6 mx-6 bg-white  flex flex-col items-center;
+            .header {
+                @apply flex flex-col items-center mt-20;
+                .title {
+                    @apply text-2xl tracking-[25px] mb-2 font-bold;
+                }
+                .subtitle {
+                    @apply text-xl tracking-[25px] font-bold mb-4;
+                }
+            }
+            .firm-info {
+                @apply w-[80%];
+                .table {
+                    @apply w-[100%];
+                    .row {
+                        @apply border-b border-black;
+                        .item {
+                            @apply w-[90px];
+                        }
+                        .value {
+                        }
+                    }
+                }
+            }
+        }
+        .export-btn {
+            @apply bg-opacity-100 border border-blue-500 mx-6 mb-3;
+            @media (max-width: 900px) {
+                @apply text-white bg-blue-600;
+            }
+            &:hover {
+                @apply text-white bg-blue-600;
+                transition: 0.3s;
+            }
+        }
     }
 }
