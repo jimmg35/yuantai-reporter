@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { IPaper } from '../../pages/container/Paper'
+import { IPaper } from '../../container/Paper'
 
 export const paperParams: IPaper = {
   pid: 'paper',

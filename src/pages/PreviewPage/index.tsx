@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import './index.scss'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
-import Paper from '../container/Paper'
+import Paper from '../../container/Paper'
 import paperParamsContext from '../../routes/PaperContext'
 
 const PreviewPage: React.FC = () => {
