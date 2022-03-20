@@ -17,6 +17,21 @@
                 input {
                     @apply rounded-md border border-sup py-1 px-2;
                 }
+                .table {
+                    @apply bg-white shadow-md rounded-md p-5;
+                    .row {
+                        @apply leading-10 border;
+                        .right {
+                            @apply text-right;
+                        }
+                        .center {
+                            @apply text-center;
+                        }
+                        .left {
+                            @apply text-left;
+                        }
+                    }
+                }
             }
             .row-set {
                 @apply flex justify-center;

@@ -7,9 +7,14 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import Button from '@mui/material/Button';
+import Button from '@mui/material/Button'
+import { IItem } from '../../container/Paper'
+import { useNavigate } from "react-router-dom";
+
+const formatter = new Intl.NumberFormat(undefined, { style: 'decimal' })
 
 const FormPage: React.FC = () => {
+  const navigate = useNavigate()
   const paperParamManager = useContext(paperParamsContext)
   const [itemDialogOpen, setitemDialogOpen] = useState<boolean>(false)
 
@@ -20,11 +25,19 @@ const FormPage: React.FC = () => {
   const [uniNumber, setuniNumber] = useState<string>(paperParamManager.paperParams.firmInfo.uniNumber)
   const [firmTel, setfirmTel] = useState<string>(paperParamManager.paperParams.firmInfo.firmTel)
   const [firmAddress, setfirmAddress] = useState<string>(paperParamManager.paperParams.firmInfo.firmAddress)
-
   const [firstParty, setfirstParty] = useState<string>('')
-  const [contructionAddress, setcontructionAddress] = useState<string>('')
+  const [constructionAddress, setconstructionAddress] = useState<string>('')
   const [constructionName, setconstructionName] = useState<string>('')
   const [quotationDate, setquotationDate] = useState<string>('')
+
+  const [items, setitems] = useState<IItem[]>(paperParamManager.paperParams.items)
+
+  const [serial, setserial] = useState<string>('')
+  const [name, setname] = useState<string>('')
+  const [unit, setunit] = useState<string>('')
+  const [unitPrice, setunitPrice] = useState<string>('')
+  const [amount, setamount] = useState<string>('')
+  const [memo, setmemo] = useState<string>('')
 
   const handleItemDialogClose = () => {
     setitemDialogOpen(false)
@@ -32,6 +45,36 @@ const FormPage: React.FC = () => {
 
   const handleItemDialogSave = () => {
     setitemDialogOpen(false)
+    setserial('')
+    setname('')
+    setunit('')
+    setunitPrice('')
+    setamount('')
+    setmemo('')
+    const newItem: IItem = {
+      serial: serial,
+      name: name,
+      unit: unit,
+      unitPrice: Number(unitPrice),
+      amount: Number(amount),
+      memo: memo
+    }
+    setitems((oldArray) => oldArray.concat(newItem))
+  }
+
+  const handleRoute2Preview = () => {
+    paperParamManager.paperParams.firmInfo = {
+      contact: contact,
+      firstParty: firstParty,
+      uniNumber: uniNumber,
+      constructionAddress: constructionAddress,
+      firmTel: firmTel,
+      constructionName: constructionName,
+      firmAddress: firmAddress,
+      quotationDate: quotationDate
+    }
+    paperParamManager.paperParams.items = items
+    navigate('/preview')
   }
 
   return (
@@ -69,7 +112,7 @@ const FormPage: React.FC = () => {
             </div>
             <div className='input-set'>
               <label>施工地址</label>
-              <input type="text" value={contructionAddress} onChange={(event) => { setcontructionAddress(event.target.value) }}></input>
+              <input type="text" value={constructionAddress} onChange={(event) => { setconstructionAddress(event.target.value) }}></input>
             </div>
           </div>
           <div className='row-set'>
@@ -98,6 +141,42 @@ const FormPage: React.FC = () => {
           <div className='input-set'>
             <button onClick={() => { setitemDialogOpen(true) }}>新增工項</button>
           </div>
+          <div className='input-set'>
+            <table className='table'>
+              <thead>
+                <tr className='row'>
+                  <th>項次</th>
+                  <th className='left'>工程項目</th>
+                  <th>單位</th>
+                  <th className='right'>單價</th>
+                  <th className='right'>數量</th>
+                  <th className='right'>金額</th>
+                  <th className='center'>備註</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  items.map((row, index) => {
+                    return <tr key={index} className='row'>
+                      <td className='center'>{row.serial}</td>
+                      <td>{row.name}</td>
+                      <td className='center'>{row.unit}</td>
+                      <td className='right'>{row.unitPrice ? formatter.format(row.unitPrice) : ''}</td>
+                      <td className='right'>{row.amount ? formatter.format(row.amount) : ''}</td>
+                      <td className='right'>{row.unitPrice && row.amount ? formatter.format(row.unitPrice * row.amount) : ''}</td>
+                      <td className='center'>{row.memo}</td>
+                    </tr>
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className='form-block form-item-info'>
+          <div className='input-set'>
+            <button onClick={handleRoute2Preview}>預覽PDF</button>
+          </div>
         </div>
 
       </div>
@@ -112,6 +191,8 @@ const FormPage: React.FC = () => {
             type="text"
             fullWidth
             variant="standard"
+            value={serial}
+            onChange={(event) => { setserial(event.target.value) }}
           />
           <TextField
             autoFocus
@@ -120,6 +201,8 @@ const FormPage: React.FC = () => {
             type="text"
             fullWidth
             variant="standard"
+            value={name}
+            onChange={(event) => { setname(event.target.value) }}
           />
           <TextField
             autoFocus
@@ -128,30 +211,28 @@ const FormPage: React.FC = () => {
             type="text"
             fullWidth
             variant="standard"
+            value={unit}
+            onChange={(event) => { setunit(event.target.value) }}
           />
           <TextField
             autoFocus
             margin="dense"
             label="單價"
-            type="text"
+            type="number"
             fullWidth
             variant="standard"
+            value={unitPrice}
+            onChange={(event) => { setunitPrice(event.target.value) }}
           />
           <TextField
             autoFocus
             margin="dense"
             label="數量"
-            type="text"
+            type="number"
             fullWidth
             variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            label="金額"
-            type="text"
-            fullWidth
-            variant="standard"
+            value={amount}
+            onChange={(event) => { setamount(event.target.value) }}
           />
           <TextField
             autoFocus
@@ -160,6 +241,8 @@ const FormPage: React.FC = () => {
             type="text"
             fullWidth
             variant="standard"
+            value={memo}
+            onChange={(event) => { setmemo(event.target.value) }}
           />
         </DialogContent>
         <DialogActions>

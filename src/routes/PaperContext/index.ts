@@ -19,14 +19,14 @@ import { IPaper } from '../../container/Paper'
 //     quotationDate: '2021-12-27'
 //   },
 //   items: [
-//     { serial: '一', name: '連續壁、扶壁' },
-//     { serial: '1', name: '連續壁、扶壁棄土證明', unit: 'M3', unitPrice: 250, amount: 1206 },
-//     { serial: '2', name: '連續壁、扶壁棄土運棄', unit: 'M3', unitPrice: 1350, amount: 1206 },
-//     { serial: '二', name: '土方挖運棄' },
-//     { serial: '1', name: '土方證明', unit: 'M3', unitPrice: 150, amount: 3322 },
-//     { serial: '2', name: '土方挖運棄', unit: 'M3', unitPrice: 1200, amount: 3322 },
-//     { serial: '3', name: '抽面水', unit: '式', unitPrice: 80000, amount: 1 },
-//     { serial: '4', name: '垃圾運棄', unit: 'M3', unitPrice: 3000, amount: 1, memo: '車上方' }
+// { serial: '一', name: '連續壁、扶壁' },
+// { serial: '1', name: '連續壁、扶壁棄土證明', unit: 'M3', unitPrice: 250, amount: 1206 },
+// { serial: '2', name: '連續壁、扶壁棄土運棄', unit: 'M3', unitPrice: 1350, amount: 1206 },
+// { serial: '二', name: '土方挖運棄' },
+// { serial: '1', name: '土方證明', unit: 'M3', unitPrice: 150, amount: 3322 },
+// { serial: '2', name: '土方挖運棄', unit: 'M3', unitPrice: 1200, amount: 3322 },
+// { serial: '3', name: '抽面水', unit: '式', unitPrice: 80000, amount: 1 },
+// { serial: '4', name: '垃圾運棄', unit: 'M3', unitPrice: 3000, amount: 1, memo: '車上方' }
 //   ],
 //   taxRatio: 0.05
 // }
@@ -51,7 +51,16 @@ class PaperParamManager {
         firmAddress: '台北市南京西路354號3F',
         quotationDate: ''
       },
-      items: [],
+      items: [
+        // { serial: '一', name: '連續壁、扶壁' },
+        // { serial: '1', name: '連續壁、扶壁棄土證明', unit: 'M3', unitPrice: 250, amount: 1206 },
+        // { serial: '2', name: '連續壁、扶壁棄土運棄', unit: 'M3', unitPrice: 1350, amount: 1206 },
+        // { serial: '二', name: '土方挖運棄' },
+        // { serial: '1', name: '土方證明', unit: 'M3', unitPrice: 150, amount: 3322 },
+        // { serial: '2', name: '土方挖運棄', unit: 'M3', unitPrice: 1200, amount: 3322 },
+        // { serial: '3', name: '抽面水', unit: '式', unitPrice: 80000, amount: 1 },
+        // { serial: '4', name: '垃圾運棄', unit: 'M3', unitPrice: 3000, amount: 1, memo: '車上方' }
+      ],
       taxRatio: 0.05
     }
   }

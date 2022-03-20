@@ -20,8 +20,10 @@ const PreviewPage: React.FC = () => {
   return (
     <div className='preview-page'>
       <div className='container'>
-        <Paper {...paperParamManager.paperParams}></Paper>
-        <button className='export-btn' onClick={handleExportPDF}>輸出pdf</button>
+        <div className='form-block'>
+          <Paper {...paperParamManager.paperParams}></Paper>
+          <button className='export-btn' onClick={handleExportPDF}>輸出pdf</button>
+        </div>
       </div>
     </div>
   )
