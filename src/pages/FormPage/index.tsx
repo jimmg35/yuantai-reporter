@@ -71,6 +71,10 @@ const FormPage: React.FC = () => {
   }
 
   const handleRoute2Preview = () => {
+    paperParamManager.paperParams.titleSet = {
+      title: title,
+      subtitle: subTitle
+    }
     paperParamManager.paperParams.firmInfo = {
       contact: contact,
       firstParty: firstParty,
@@ -86,11 +90,8 @@ const FormPage: React.FC = () => {
   }
 
   const handleRemoveItem = (removeIndex: number) => {
-    console.log(removeIndex)
-
     const shallowItems = items
     setitems(shallowItems.filter((item, index) => index !== removeIndex))
-
   }
 
   return (
