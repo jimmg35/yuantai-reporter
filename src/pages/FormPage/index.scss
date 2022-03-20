@@ -20,7 +20,12 @@
                 .table {
                     @apply bg-white shadow-md rounded-md p-5;
                     .row {
-                        @apply leading-10 border;
+                        @apply leading-10 border h-[40px];
+                        @media (max-width: 900px) {
+                            .hiddens {
+                                @apply hidden;
+                            }
+                        }
                         .right {
                             @apply text-right;
                         }

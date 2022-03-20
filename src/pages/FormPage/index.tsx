@@ -9,7 +9,9 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import Button from '@mui/material/Button'
 import { IItem } from '../../container/Paper'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
+import { IconButton } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 const formatter = new Intl.NumberFormat(undefined, { style: 'decimal' })
 
@@ -41,6 +43,12 @@ const FormPage: React.FC = () => {
 
   const handleItemDialogClose = () => {
     setitemDialogOpen(false)
+    setserial('')
+    setname('')
+    setunit('')
+    setunitPrice('')
+    setamount('')
+    setmemo('')
   }
 
   const handleItemDialogSave = () => {
@@ -75,6 +83,14 @@ const FormPage: React.FC = () => {
     }
     paperParamManager.paperParams.items = items
     navigate('/preview')
+  }
+
+  const handleRemoveItem = (removeIndex: number) => {
+    console.log(removeIndex)
+
+    const shallowItems = items
+    setitems(shallowItems.filter((item, index) => index !== removeIndex))
+
   }
 
   return (
@@ -145,26 +161,32 @@ const FormPage: React.FC = () => {
             <table className='table'>
               <thead>
                 <tr className='row'>
-                  <th>項次</th>
+                  <th>刪除</th>
+                  <th className='hiddens'>項次</th>
                   <th className='left'>工程項目</th>
-                  <th>單位</th>
-                  <th className='right'>單價</th>
-                  <th className='right'>數量</th>
-                  <th className='right'>金額</th>
-                  <th className='center'>備註</th>
+                  <th className='hiddens'>單位</th>
+                  <th className='right hiddens'>單價</th>
+                  <th className='right hiddens'>數量</th>
+                  <th className='right hiddens'>金額</th>
+                  <th className='center hiddens'>備註</th>
                 </tr>
               </thead>
               <tbody>
                 {
                   items.map((row, index) => {
                     return <tr key={index} className='row'>
-                      <td className='center'>{row.serial}</td>
+                      <td className='center'>
+                        <IconButton color="error" component="span" onClick={() => { handleRemoveItem(index) }}>
+                          <DeleteIcon />
+                        </IconButton>
+                      </td>
+                      <td className='center hiddens'>{row.serial}</td>
                       <td>{row.name}</td>
-                      <td className='center'>{row.unit}</td>
-                      <td className='right'>{row.unitPrice ? formatter.format(row.unitPrice) : ''}</td>
-                      <td className='right'>{row.amount ? formatter.format(row.amount) : ''}</td>
-                      <td className='right'>{row.unitPrice && row.amount ? formatter.format(row.unitPrice * row.amount) : ''}</td>
-                      <td className='center'>{row.memo}</td>
+                      <td className='center hiddens'>{row.unit}</td>
+                      <td className='right hiddens'>{row.unitPrice ? formatter.format(row.unitPrice) : ''}</td>
+                      <td className='right hiddens'>{row.amount ? formatter.format(row.amount) : ''}</td>
+                      <td className='right hiddens'>{row.unitPrice && row.amount ? formatter.format(row.unitPrice * row.amount) : ''}</td>
+                      <td className='center hiddens'>{row.memo}</td>
                     </tr>
                   })
                 }
