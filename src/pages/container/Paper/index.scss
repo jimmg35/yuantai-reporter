@@ -38,8 +38,11 @@
                     &.right {
                         @apply text-right;
                     }
-                    .split-cell {
-                        @apply border-0 leading-5;
+                    &.center {
+                        @apply text-center;
+                    }
+                    &.memoArea {
+                        @apply h-[150px] align-text-top;
                     }
                 }
             }

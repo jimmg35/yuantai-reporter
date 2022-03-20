@@ -1,5 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './index.scss'
+
+export interface ITitleSet {
+  title: string
+  subtitle: string
+}
+
+export interface IFirmInfo {
+  contact: string
+  firstParty: string
+  uniNumber: string
+  constructionAddress: string
+  firmTel: string
+  constructionName: string
+  firmAddress: string
+  quotationDate: string
+}
 
 export interface IItem {
   serial?: string
@@ -12,33 +28,37 @@ export interface IItem {
 
 export interface IPaper {
   pid: string
+  titleSet: ITitleSet
+  firmInfo: IFirmInfo
+  items: IItem[]
+  taxRatio: number
 }
-
-const fakeData: IItem[] = [
-  { serial: '一', name: '連續壁、扶壁' },
-  { serial: '1', name: '連續壁、扶壁棄土證明', unit: 'M3', unitPrice: 250, amount: 1206 },
-  { serial: '2', name: '連續壁、扶壁棄土運棄', unit: 'M3', unitPrice: 1350, amount: 1206 },
-  { serial: '二', name: '土方挖運棄' },
-  { serial: '1', name: '土方證明', unit: 'M3', unitPrice: 150, amount: 498300 },
-  { serial: '2', name: '土方挖運棄', unit: 'M3', unitPrice: 1200, amount: 3986400 },
-  { serial: '3', name: '抽面水', unit: '式', unitPrice: 80000, amount: 80000 },
-  { serial: '4', name: '垃圾運棄', unit: 'M3', unitPrice: 3000, amount: 3000, memo: '車上方' }
-]
 
 // const formatter = new Intl.NumberFormat('en-US', {
 //   style: 'currency',
 //   currency: 'USD'
 // })
-
 const formatter = new Intl.NumberFormat(undefined, { style: 'decimal' })
 
 const Paper = (props: IPaper) => {
+  const [totalPrice, settotalPrice] = useState<number>(0)
+
+  useEffect(() => {
+    let total = 0
+    props.items.forEach((item) => {
+      if (item.unitPrice && item.amount) {
+        total += item.unitPrice * item.amount
+      }
+    })
+    settotalPrice(total)
+  }, [])
+
   return (
     <div className='paper-a4' id={props.pid}>
 
       <div className='header'>
-        <p className='title'>元太開發工程有限公司</p>
-        <p className='subtitle'>報價單</p>
+        <p className='title'>{props.titleSet.title}</p>
+        <p className='subtitle'>{props.titleSet.subtitle}</p>
       </div>
 
       <div className='firm-info'>
@@ -46,27 +66,27 @@ const Paper = (props: IPaper) => {
           <tbody>
             <tr className='row'>
               <td className='item'>公司聯絡人:</td>
-              <td className='value'>劉鎮賢(0913-576-159)</td>
+              <td className='value'>{props.firmInfo.contact}</td>
               <td className='item'>業主單位:</td>
-              <td className='value'>義華建設</td>
+              <td className='value'>{props.firmInfo.firstParty}</td>
             </tr>
             <tr className='row'>
               <td className='item'>統一編號:</td>
-              <td className='value'>91086195</td>
+              <td className='value'>{props.firmInfo.uniNumber}</td>
               <td className='item'>施工地址:</td>
-              <td className='value'>台北市松江路</td>
+              <td className='value'>{props.firmInfo.constructionAddress}</td>
             </tr>
             <tr className='row'>
               <td className='item'>公司電話:</td>
-              <td className='value'>(02)2555-0361</td>
+              <td className='value'>{props.firmInfo.firmTel}</td>
               <td className='item'>工程名稱:</td>
-              <td className='value'>南京葒新建工程(土方工程)</td>
+              <td className='value'>{props.firmInfo.constructionName}</td>
             </tr>
             <tr className='row'>
               <td className='item'>公司地址:</td>
-              <td className='value'>台北市南京西路354號3F</td>
+              <td className='value'>{props.firmInfo.firmAddress}</td>
               <td className='item'>報價日期:</td>
-              <td className='value'> 2021/12/27</td>
+              <td className='value'>{props.firmInfo.quotationDate}</td>
             </tr>
           </tbody>
         </table>
@@ -87,11 +107,11 @@ const Paper = (props: IPaper) => {
           </thead>
           <tbody>
             {
-              fakeData.map((row, index) => {
+              props.items.map((row, index) => {
                 return <tr key={index} className='row'>
-                  <td>{row.serial}</td>
+                  <td className='center'>{row.serial}</td>
                   <td>{row.name}</td>
-                  <td>{row.unit}</td>
+                  <td className='center'>{row.unit}</td>
                   <td className='right'>{row.unitPrice ? formatter.format(row.unitPrice) : ''}</td>
                   <td className='right'>{row.amount ? formatter.format(row.amount) : ''}</td>
                   <td className='right'>{row.unitPrice && row.amount ? formatter.format(row.unitPrice * row.amount) : ''}</td>
@@ -101,12 +121,43 @@ const Paper = (props: IPaper) => {
             }
             <tr className='row'>
               <td></td>
+              <td>小計:</td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
+            </tr>
+            <tr className='row'>
               <td></td>
+              <td>以上報價稅率:</td>
+              <td></td>
+              <td></td>
+              <td>稅:</td>
+              <td className='right'>{totalPrice}</td>
+              <td></td>
+            </tr>
+            <tr className='row'>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td className='right'>{totalPrice * props.taxRatio}</td>
+              <td></td>
+            </tr>
+            <tr className='row'>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>總計:</td>
+              <td className='right'>{totalPrice + totalPrice * props.taxRatio}</td>
+              <td></td>
+            </tr>
+            <tr className='row'>
+              <td className='memoArea' colSpan={4}>備註:</td>
+              <td className='memoArea' colSpan={3}></td>
             </tr>
 
           </tbody>
