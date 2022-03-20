@@ -1,2 +1,39 @@
 .form-page {
+    @apply w-screen h-screen bg-main flex flex-col items-center overflow-auto;
+    .form-container {
+        @apply w-[800px] h-fit;
+
+        @media (max-width: 900px) {
+            @apply w-[350px] h-fit;
+        }
+
+        .form-block {
+            @apply p-4 border bg-sec m-4 rounded-md shadow-xl;
+            .input-set {
+                @apply flex flex-col m-4 text-xl;
+                label {
+                    @apply mb-2;
+                }
+                input {
+                    @apply rounded-md border border-sup py-1 px-2;
+                }
+            }
+            .row-set {
+                @apply flex justify-center;
+                @media (max-width: 900px) {
+                    @apply flex flex-col;
+                }
+            }
+            button {
+                @apply border border-sup py-2 text-black rounded-md;
+                &:hover {
+                    @apply bg-sup text-white rounded-md;
+                    transition: 0.3s;
+                }
+                @media (max-width: 900px) {
+                    @apply bg-sup text-white rounded-md;
+                }
+            }
+        }
+    }
 }

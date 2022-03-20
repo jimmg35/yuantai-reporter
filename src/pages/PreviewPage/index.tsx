@@ -7,7 +7,7 @@ import Paper from '../../container/Paper'
 import paperParamsContext from '../../routes/PaperContext'
 
 const PreviewPage: React.FC = () => {
-  const fakePaperDataSet = useContext(paperParamsContext)
+  const paperParamManager = useContext(paperParamsContext)
   const handleExportPDF = async () => {
     const doc = new jsPDF()
     const image = await html2canvas(document.getElementById('paper') as HTMLElement, {
@@ -20,7 +20,7 @@ const PreviewPage: React.FC = () => {
   return (
     <div className='preview-page'>
       <div className='container'>
-        <Paper {...fakePaperDataSet}></Paper>
+        <Paper {...paperParamManager.paperParams}></Paper>
         <button className='export-btn' onClick={handleExportPDF}>輸出pdf</button>
       </div>
     </div>

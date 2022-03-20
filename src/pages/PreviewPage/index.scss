@@ -1,17 +1,17 @@
 .preview-page {
-    @apply w-screen h-fit bg-gray-300 m-0 absolute flex flex-col items-center;
+    @apply w-screen h-fit bg-main m-0 absolute flex flex-col items-center;
     @media (max-width: 900px) {
-        @apply w-fit h-fit bg-gray-300 m-0 absolute flex flex-col items-center;
+        @apply w-fit h-fit bg-main m-0 absolute flex flex-col items-center;
     }
     .container {
         @apply flex flex-col w-fit h-fit;
         .export-btn {
-            @apply bg-opacity-100 border border-blue-500 mx-6 mb-3 leading-5;
+            @apply bg-sup mx-6 mb-3 leading-5 text-white;
             @media (max-width: 900px) {
-                @apply text-white bg-blue-600;
+                @apply bg-sup mx-6 mb-3 leading-5 text-white;
             }
             &:hover {
-                @apply text-white bg-blue-600;
+                @apply text-white bg-red-600;
                 transition: 0.3s;
             }
         }

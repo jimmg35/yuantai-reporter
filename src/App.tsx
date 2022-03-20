@@ -6,12 +6,12 @@ import { Routes, Route, HashRouter } from 'react-router-dom'
 import FormPage from './pages/FormPage'
 import PreviewPage from './pages/PreviewPage'
 import NoMatchPage from './pages/NoMatchPage'
-import paperParamsContext, { paperParams } from './routes/PaperContext'
+import paperParamsContext, { paperParamManager } from './routes/PaperContext'
 
 const App: React.FC = () => {
   return (
     <HashRouter>
-      <paperParamsContext.Provider value={paperParams}>
+      <paperParamsContext.Provider value={paperParamManager}>
         <Routes>
           <Route path={"/"} element={<FormPage />} />
           <Route path={"/preview"} element={<PreviewPage />} />
