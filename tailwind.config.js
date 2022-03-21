@@ -1,4 +1,5 @@
 module.exports = {
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {
@@ -7,7 +8,7 @@ module.exports = {
         'sec': '#E5F0FF',
         'sup': '#45BFBF'
       }
-    }
+    },
   },
-  plugins: []
+  plugins: [],
 }
