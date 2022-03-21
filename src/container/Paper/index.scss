@@ -1,22 +1,26 @@
 .paper-a4 {
-    @apply w-[21cm] h-[29.7cm] mb-3 mt-6 mx-6 bg-white flex flex-col items-center;
+    @apply mb-3 mt-6 mx-6 bg-white flex flex-col items-center;
+    width: 21cm;
+    height: 29.7cm;
     .header {
         @apply flex flex-col items-center mt-20;
         .title {
-            @apply text-2xl tracking-[25px] mb-2 font-bold;
+            @apply text-2xl mb-2 font-bold;
+            letter-spacing: 25px;
         }
         .subtitle {
-            @apply text-xl tracking-[25px] font-bold mb-4;
+            @apply text-xl font-bold mb-4;
+            letter-spacing: 25px;
         }
     }
     .firm-info {
-        @apply w-[80%];
+        width: 80%;
         .table {
-            @apply w-[100%];
+            width: 100%;
             .row {
                 @apply border-b border-black leading-7;
                 .item {
-                    @apply w-[90px];
+                    width: 90px;
                 }
                 .value {
                 }
@@ -24,12 +28,12 @@
         }
     }
     .quotation-info {
-        @apply w-[80%] mt-16;
+        @apply mt-16;
+        width: 80%;
         .table {
-            @apply w-[100%];
+            width: 100%;
             @apply border border-black;
             .row {
-                // @apply border-b border-black h-10;
                 th {
                     @apply border border-black font-black leading-5;
                 }
@@ -42,7 +46,8 @@
                         @apply text-center;
                     }
                     &.memoArea {
-                        @apply h-[150px] align-text-top;
+                        @apply align-text-top;
+                        height: 150px;
                     }
                 }
             }

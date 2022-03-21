@@ -158,42 +158,47 @@ const FormPage: React.FC = () => {
           <div className='input-set'>
             <button onClick={() => { setitemDialogOpen(true) }}>新增工項</button>
           </div>
-          <div className='input-set'>
-            <table className='table'>
-              <thead>
-                <tr className='row'>
-                  <th>刪除</th>
-                  <th className='hiddens'>項次</th>
-                  <th className='left'>工程項目</th>
-                  <th className='hiddens'>單位</th>
-                  <th className='right hiddens'>單價</th>
-                  <th className='right hiddens'>數量</th>
-                  <th className='right hiddens'>金額</th>
-                  <th className='center hiddens'>備註</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  items.map((row, index) => {
-                    return <tr key={index} className='row'>
-                      <td className='center'>
-                        <IconButton color="error" component="span" onClick={() => { handleRemoveItem(index) }}>
-                          <DeleteIcon />
-                        </IconButton>
-                      </td>
-                      <td className='center hiddens'>{row.serial}</td>
-                      <td>{row.name}</td>
-                      <td className='center hiddens'>{row.unit}</td>
-                      <td className='right hiddens'>{row.unitPrice ? formatter.format(row.unitPrice) : ''}</td>
-                      <td className='right hiddens'>{row.amount ? formatter.format(row.amount) : ''}</td>
-                      <td className='right hiddens'>{row.unitPrice && row.amount ? formatter.format(row.unitPrice * row.amount) : ''}</td>
-                      <td className='center hiddens'>{row.memo}</td>
+          {
+            items.length === 0
+              ? <></>
+              : <div className='input-set'>
+                <table className='table'>
+                  <thead>
+                    <tr className='row'>
+                      <th>刪除</th>
+                      <th className='hiddens'>項次</th>
+                      <th className='left'>工程項目</th>
+                      <th className='hiddens'>單位</th>
+                      <th className='right hiddens'>單價</th>
+                      <th className='right hiddens'>數量</th>
+                      <th className='right hiddens'>金額</th>
+                      <th className='center hiddens'>備註</th>
                     </tr>
-                  })
-                }
-              </tbody>
-            </table>
-          </div>
+                  </thead>
+                  <tbody>
+                    {
+                      items.map((row, index) => {
+                        return <tr key={index} className='row'>
+                          <td className='center'>
+                            <IconButton color="error" component="span" onClick={() => { handleRemoveItem(index) }}>
+                              <DeleteIcon />
+                            </IconButton>
+                          </td>
+                          <td className='center hiddens'>{row.serial}</td>
+                          <td>{row.name}</td>
+                          <td className='center hiddens'>{row.unit}</td>
+                          <td className='right hiddens'>{row.unitPrice ? formatter.format(row.unitPrice) : ''}</td>
+                          <td className='right hiddens'>{row.amount ? formatter.format(row.amount) : ''}</td>
+                          <td className='right hiddens'>{row.unitPrice && row.amount ? formatter.format(row.unitPrice * row.amount) : ''}</td>
+                          <td className='center hiddens'>{row.memo}</td>
+                        </tr>
+                      })
+                    }
+                  </tbody>
+                </table>
+              </div>
+          }
+
         </div>
 
         <div className='form-block form-item-info'>
