@@ -118,15 +118,23 @@ const init = {
   dailyReports: []
 } as IInitState
 
+interface IAddReportAction {
+  payload: IDailyReport
+  type: string
+}
+
 export const dailyReportSlice = createSlice({
   name: 'dailyReport',
   initialState: init,
   reducers: {
+    addDailyReport: (state, action: IAddReportAction) => {
+      state.dailyReports.push(action.payload)
+    }
   }
 })
 
 export const selectdailyReport = (state: any) => {
   return state.dailyReport
 }
-export const { } = dailyReportSlice.actions
+export const { addDailyReport } = dailyReportSlice.actions
 export default dailyReportSlice.reducer

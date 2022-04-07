@@ -7,14 +7,16 @@ import FormPage from './pages/FormPage'
 import PreviewPage from './pages/PreviewPage'
 import NoMatchPage from './pages/NoMatchPage'
 import paperParamsContext, { paperParamManager } from './routes/PaperContext'
+import DailyReportPage from './pages/DailyReportPage'
 
 const App: React.FC = () => {
   return (
     <HashRouter>
       <paperParamsContext.Provider value={paperParamManager}>
         <Routes>
-          <Route path={"/"} element={<FormPage />} />
-          <Route path={"/preview"} element={<PreviewPage />} />
+          <Route path={"/daily"} element={<DailyReportPage />} />
+          <Route path={"/price"} element={<FormPage />} />
+          <Route path={"/pricepreview"} element={<PreviewPage />} />
           <Route path={"*"} element={<NoMatchPage />} />
         </Routes>
       </paperParamsContext.Provider>
