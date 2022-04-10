@@ -10,7 +10,7 @@
         }
 
         .form-block {
-            @apply p-4 border bg-sec m-4 rounded-md shadow-xl;
+            @apply p-4 border bg-sec m-4 rounded-md shadow-xl mt-1;
             .input-set {
                 @apply flex flex-col m-4 text-xl;
                 label {
@@ -57,6 +57,9 @@
                     @apply bg-sup text-white rounded-md;
                 }
             }
+        }
+        .form-title{
+            @apply mx-4 mt-10 text-white text-3xl;
         }
     }
 }

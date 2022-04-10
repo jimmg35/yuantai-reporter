@@ -86,7 +86,7 @@ interface IGroceryData {
 }
 
 interface IGroceryInfo {
-  data: IGroceryData
+  data: IGroceryData[]
   lastDayAccumulation: number
   todayCount: number
   totalCount: number
@@ -111,30 +111,217 @@ export interface IDailyReport {
 }
 
 interface IInitState {
-  dailyReports: IDailyReport[]
+  dailyReport: IDailyReport
 }
 
 const init = {
-  dailyReports: []
+  dailyReport: {
+    titleInfo: {
+      firmName: '元太開發工程',
+      reportName: '支出統計表(日報表)'
+    },
+    reportInfo: {
+      constructionName: '',
+      author: 'YURA',
+      date: '',
+      level: 0,
+      day: 0
+    },
+    debtInfo: {
+      lastDayDebt: 0,
+      accumulateWageDebt: 0
+    },
+    incomeInfo: {
+      data: [
+        {
+          payee: '',
+          value: 0
+        },
+        {
+          payee: '',
+          value: 0
+        },
+        {
+          payee: '',
+          value: 0
+        }
+      ],
+      lastDayAccumulation: 0,
+      todayCount: 0,
+      totalCount: 0
+    },
+    transportationInfo: {
+      data: [
+        {
+          carType: '',
+          amount: 0,
+          total: 0,
+          price: 0,
+          priceUnit: 0,
+          note: ''
+        },
+        {
+          carType: '',
+          amount: 0,
+          total: 0,
+          price: 0,
+          priceUnit: 0,
+          note: ''
+        },
+        {
+          carType: '',
+          amount: 0,
+          total: 0,
+          price: 0,
+          priceUnit: 0,
+          note: ''
+        },
+        {
+          carType: '',
+          amount: 0,
+          total: 0,
+          price: 0,
+          priceUnit: 0,
+          note: ''
+        }
+      ],
+      transportationSpend: {
+        lastDayAccumulation: 0,
+        todayCount: 0,
+        totalCount: 0
+      },
+      volumnSpend: {
+        lastDayAccumulation: 0,
+        todayCount: 0,
+        totalCount: 0
+      }
+    },
+    staffAndMachineInfo: {
+      staffData: [
+        {
+          staff: '',
+          hour: 0,
+          totalPay: 0,
+          note: ''
+        },
+        {
+          staff: '',
+          hour: 0,
+          totalPay: 0,
+          note: ''
+        },
+        {
+          staff: '',
+          hour: 0,
+          totalPay: 0,
+          note: ''
+        },
+        {
+          staff: '',
+          hour: 0,
+          totalPay: 0,
+          note: ''
+        }
+      ],
+      machineData: [
+        {
+          machineName: '',
+          operator: '',
+          hour: 0,
+          totalPay: 0,
+          note: ''
+        },
+        {
+          machineName: '',
+          operator: '',
+          hour: 0,
+          totalPay: 0,
+          note: ''
+        },
+        {
+          machineName: '',
+          operator: '',
+          hour: 0,
+          totalPay: 0,
+          note: ''
+        },
+        {
+          machineName: '',
+          operator: '',
+          hour: 0,
+          totalPay: 0,
+          note: ''
+        },
+        {
+          machineName: '',
+          operator: '',
+          hour: 0,
+          totalPay: 0,
+          note: ''
+        }
+      ],
+      lastDayAccumulation: 0,
+      todayCount: 0,
+      totalCount: 0
+    },
+    groceryInfo: {
+      data: [
+        {
+          itemName: '',
+          price: 0
+        },
+        {
+          itemName: '',
+          price: 0
+        },
+        {
+          itemName: '',
+          price: 0
+        },
+        {
+          itemName: '',
+          price: 0
+        },
+        {
+          itemName: '',
+          price: 0
+        }
+      ],
+      lastDayAccumulation: 0,
+      todayCount: 0,
+      totalCount: 0
+    },
+    totalInfo: {
+      lastDayAccumulation: 0,
+      todayCount: 0,
+      totalCount: 0
+    },
+    note: ''
+  }
 } as IInitState
 
-interface IAddReportAction {
-  payload: IDailyReport
-  type: string
-}
+// interface IContent {
+//   value: string | number
+//   path: string
+// }
+
+// interface IAddStringAction {
+//   payload: IContent
+//   type: string
+// }
 
 export const dailyReportSlice = createSlice({
   name: 'dailyReport',
   initialState: init,
   reducers: {
-    addDailyReport: (state, action: IAddReportAction) => {
-      state.dailyReports.push(action.payload)
-    }
+    // changeValue: (state, action: IAddStringAction) => {
+    //   console.log(state)
+    // }
   }
 })
 
-export const selectdailyReport = (state: any) => {
-  return state.dailyReport
+export const selectDailyReport = (state: any) => {
+  return state.dailyReport.dailyReport
 }
-export const { addDailyReport } = dailyReportSlice.actions
+// export const { } = dailyReportSlice.actions
 export default dailyReportSlice.reducer
